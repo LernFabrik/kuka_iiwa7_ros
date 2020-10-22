@@ -2,14 +2,16 @@ ARG BASE_IMAGE=prachandabhabu/env:melodic-robot
 
 FROM ${BASE_IMAGE}
 
-RUN mkdir -p /catkin_ws/src \
-    && cd /catkin_ws/src \
+RUN mkdir -p ~/catkin_ws/src
+
+RUN cd ~/catkin_ws/src \
     && git clone --recurse-submodules https://github.com/LernFabrik/kuka_iiwa7_ros.git 
 
-RUN cd /catkin_ws \
-    && rosdep install --ignore-src --from-paths src \
-    && catkin init \
-    && catkin build \
-    && catkin build \
-    && catkin build 
+RUN rosdep update
+
+RUN cd ~/catkin_ws \
+    && rosdep install --ignore-src --from-paths src -y\
+    && /ros_entrypoint.sh \
+    && ls -a \
+    && catkin build
 

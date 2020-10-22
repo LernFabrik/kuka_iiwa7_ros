@@ -1,3 +1,5 @@
+
+ARG ROS_DISTRO=melodic
 ARG BASE_IMAGE=prachandabhanu/env:melodic-robot
 
 FROM ${BASE_IMAGE}
@@ -14,3 +16,43 @@ COPY ./kuka_fri_install.sh ./
 RUN chmod +x ./kuka_fri_install.sh && ./kuka_fri_install.sh
 
 RUN rm -rf *
+
+RUN rosdep update
+
+RUN apt-get -y install ros-${ROS_DISTRO}-pr2-controller-manager \
+    ros-${ROS_DISTRO}-pilz-testutils \
+    ros-${ROS_DISTRO}-hardware-interface \
+    ros-${ROS_DISTRO}-moveit-ros-planning \
+    python-docopt \
+    ros-${ROS_DISTRO}-prbt-pg70-support \
+    libpcl-dev \
+    ros-${ROS_DISTRO}-controller-interface \
+    ros-${ROS_DISTRO}-moveit-ros-visualization \
+    ros-${ROS_DISTRO}-moveit-ros-planning-interface \
+    ros-${ROS_DISTRO}-laser-geometry \
+    ros-${ROS_DISTRO}-prbt-support \
+    ros-${ROS_DISTRO}-controller-manager \
+    liblapack-dev \
+    ros-${ROS_DISTRO}-moveit-commander \
+    python-coverage \
+    ros-${ROS_DISTRO}-moveit-setup-assistant \
+    ros-${ROS_DISTRO}-pcl-ros \
+    ros-${ROS_DISTRO}-moveit-visual-tools \
+    ros-${ROS_DISTRO}-code-coverage \
+    python-mock \
+    ros-${ROS_DISTRO}-moveit-planners-ompl \
+    ros-${ROS_DISTRO}-moveit-kinematics \
+    ros-${ROS_DISTRO}-tf2-geometry-msgs \
+    ros-${ROS_DISTRO}-gazebo-msgs \
+    ros-${ROS_DISTRO}-moveit-msgs \
+    ros-${ROS_DISTRO}-moveit-ros-move-group \
+    ros-${ROS_DISTRO}-tf2-eigen \
+    ros-${ROS_DISTRO}-roslint \
+    ros-${ROS_DISTRO}-gazebo-ros \
+    ros-${ROS_DISTRO}-rviz \
+    ros-${ROS_DISTRO}-moveit-core \
+    ros-${ROS_DISTRO}-gazebo-ros-control \
+    ros-${ROS_DISTRO}-joint-limits-interface \
+    ros-${ROS_DISTRO}-moveit-fake-controller-manager \
+    ros-${ROS_DISTRO}-prbt-moveit-config \
+    ros-${ROS_DISTRO}-gazebo-plugins \

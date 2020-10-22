@@ -1,0 +1,15 @@
+ARG ROS_DISTRO=melodic
+FROM ros:${ROS_DISTRO}-robot
+
+WORKDIR /root
+
+RUN apt-get update && apt-get -y upgrade \
+    && apt-get clean
+
+RUN apt-get -y install vim \
+    git \
+    python-pip
+
+RUN sudo pip install catkin_tools
+    
+ENTRYPOINT [ "/ros_entrypoint.sh" ]

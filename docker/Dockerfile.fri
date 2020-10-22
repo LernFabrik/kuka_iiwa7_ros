@@ -1,0 +1,16 @@
+ARG BASE_IMAGE=prachandabhanu/env:melodic-robot
+
+FROM ${BASE_IMAGE}
+
+COPY ./kuka_fri ./kuka_fri
+
+RUN cd kuka_fri \
+    && ./waf configure \
+    && ./waf \
+    && ./waf install
+
+COPY ./kuka_fri_install.sh ./ 
+
+RUN chmod +x ./kuka_fri_install.sh && ./kuka_fri_install.sh
+
+RUN rm -rf *

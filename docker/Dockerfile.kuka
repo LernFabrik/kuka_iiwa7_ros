@@ -9,9 +9,10 @@ RUN cd ~/catkin_ws/src \
 
 RUN rosdep update
 
+RUN echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+
 RUN cd ~/catkin_ws \
     && rosdep install --ignore-src --from-paths src -y\
-    && /ros_entrypoint.sh \
     && ls -a \
     && catkin build
 

@@ -55,4 +55,4 @@ RUN apt-get -y install ros-${ROS_DISTRO}-pr2-controller-manager \
     ros-${ROS_DISTRO}-joint-limits-interface \
     ros-${ROS_DISTRO}-moveit-fake-controller-manager \
     ros-${ROS_DISTRO}-prbt-moveit-config \
-    ros-${ROS_DISTRO}-gazebo-plugins \
+    ros-${ROS_DISTRO}-gazebo-plugins 

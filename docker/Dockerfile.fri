@@ -24,9 +24,9 @@ RUN apt-get -y install ros-${ROS_DISTRO}-pr2-controller-manager \
     ros-${ROS_DISTRO}-hardware-interface \
     ros-${ROS_DISTRO}-moveit-ros-planning \
     python-docopt \
-    ros-${ROS_DISTRO}-prbt-pg70-support \
-    libpcl-dev \
-    ros-${ROS_DISTRO}-controller-interface \
+    ros-${ROS_DISTRO}-prbt-pg70-support 
+
+RUN apt-get -y install ros-${ROS_DISTRO}-controller-interface \
     ros-${ROS_DISTRO}-moveit-ros-visualization \
     ros-${ROS_DISTRO}-moveit-ros-planning-interface \
     ros-${ROS_DISTRO}-laser-geometry \
@@ -34,10 +34,15 @@ RUN apt-get -y install ros-${ROS_DISTRO}-pr2-controller-manager \
     ros-${ROS_DISTRO}-controller-manager \
     liblapack-dev \
     ros-${ROS_DISTRO}-moveit-commander \
-    python-coverage \
-    ros-${ROS_DISTRO}-moveit-setup-assistant \
-    ros-${ROS_DISTRO}-pcl-ros \
-    ros-${ROS_DISTRO}-moveit-visual-tools \
+    python-coverage
+
+RUN apt-get update && apt-get -y upgrade 
+
+RUN apt-get -y install ros-${ROS_DISTRO}-moveit-setup-assistant 
+    
+RUN apt-get update && apt-get -y upgrade 
+    
+RUN apt-get -y install ros-${ROS_DISTRO}-moveit-visual-tools \
     ros-${ROS_DISTRO}-code-coverage \
     python-mock \
     ros-${ROS_DISTRO}-moveit-planners-ompl \
@@ -48,11 +53,15 @@ RUN apt-get -y install ros-${ROS_DISTRO}-pr2-controller-manager \
     ros-${ROS_DISTRO}-moveit-ros-move-group \
     ros-${ROS_DISTRO}-tf2-eigen \
     ros-${ROS_DISTRO}-roslint \
-    ros-${ROS_DISTRO}-gazebo-ros \
-    ros-${ROS_DISTRO}-rviz \
-    ros-${ROS_DISTRO}-moveit-core \
-    ros-${ROS_DISTRO}-gazebo-ros-control \
     ros-${ROS_DISTRO}-joint-limits-interface \
-    ros-${ROS_DISTRO}-moveit-fake-controller-manager \
-    ros-${ROS_DISTRO}-prbt-moveit-config \
-    ros-${ROS_DISTRO}-gazebo-plugins 
+    ros-${ROS_DISTRO}-moveit-core
+
+RUN apt-get -y install apt-utils
+
+RUN apt-get -y install ros-${ROS_DISTRO}-pcl-ros
+
+RUN apt-get -y install ros-${ROS_DISTRO}-gazebo-ros-control ros-${ROS_DISTRO}-transmission-interface
+
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+ENTRYPOINT [ "/ros_enttypoint.sh" ]

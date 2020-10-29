@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo "[Update the package lists and upgrade them]"
-apt-get update
-apt-get upgrade -y
-
 echo "[----------> SpaceVecAlg <------------------]"
 cd 
 git clone --recursive https://github.com/costashatz/SpaceVecAlg.git

@@ -2,10 +2,6 @@ ARG BASE_IMAGE=prachandabhabu/env:melodic-robot
 
 FROM ${BASE_IMAGE}
 
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-
-RUN mkdir -p ~/catkin_ws/src
-
 RUN cd ~/catkin_ws/src \
     && git clone --recurse-submodules https://github.com/LernFabrik/kuka_iiwa7_ros.git 
 
@@ -17,4 +13,3 @@ RUN source /opt/ros/melodic/setup.bash && cd ~/catkin_ws \
     && rosdep install --ignore-src --from-paths src -y\
     && ls -a \
     && catkin build
-

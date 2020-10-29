@@ -36,5 +36,3 @@ RUN apt-get clean && apt-get update \
     git clone https://github.com/po1/axcli.git
 
 RUN apt-get -y install bash-completion ros-$ROS_DISTRO-rviz
-
-ENTRYPOINT [ "/ros_entrypoint.sh" ]

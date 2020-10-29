@@ -5,11 +5,5 @@ FROM ${BASE_IMAGE}
 RUN cd ~/catkin_ws/src \
     && git clone --recurse-submodules https://github.com/LernFabrik/kuka_iiwa7_ros.git 
 
-RUN rosdep update
-
-RUN source /opt/ros/melodic/setup.bash
-
-RUN source /opt/ros/melodic/setup.bash && cd ~/catkin_ws \
-    && rosdep install --ignore-src --from-paths src -y\
-    && ls -a \
-    && catkin build
+RUN cd ~/catkin_ws \
+    && rosdep install --ignore-src --from-paths src -y

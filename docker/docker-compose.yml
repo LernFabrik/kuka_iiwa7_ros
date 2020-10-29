@@ -18,11 +18,11 @@ services:
                 - BASE_IMAGE=prachandabhanu/env:melodic-robot
         image: prachandabhanu/env:kuka-fri
     
-    # kuka-ros:
-    #     build: 
-    #         context: .
-    #         dockerfile: Dockerfile.kuka
-    #         args: 
-    #             - ROS_DISTRO=melodic
-    #             - BASE_IMAGE=prachandabhanu/env:kuka-fri
-    #     image: prachandabhanu/env:kuka-ros
+    kuka-ros:
+        build: 
+            context: .
+            dockerfile: Dockerfile.kuka
+            args: 
+                - ROS_DISTRO=melodic
+                - BASE_IMAGE=prachandabhanu/env:kuka-fri
+        image: prachandabhanu/env:kuka-ros

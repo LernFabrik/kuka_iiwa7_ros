@@ -6,24 +6,56 @@ trigger:
 - master
 
 resources:
-- repo: self
+  containers:
+    - container: kukafri
+      image: prachandabhanu/kuka-fri
+    - container: kukafri2004
+      image: prachandabhanu/kuka-fri2004
 
 variables:
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Build
-  displayName: Build image
+- stage: catkin_make
+  displayName: Catkin Make
   jobs:  
-  - job: Build
-    displayName: Build
+  - job: ubuntu
+    displayName: ubuntu
     pool:
       vmImage: 'ubuntu-latest'
+    strategy:
+      matrix:
+        MELODIC:
+          CONTAINER: kukafri
+          CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=Debug'
+        NOETIC:
+          CONTAINER: kukafri2004
+          CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=Debug'
+    container: $[ variable['CONTAINER'] ]
+    timeoutInMinutes: 0
+    variables:
+      BUILD_DIR: '$($(Agent.BuildDirectory)/catkin_ws'
     steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/docker/Dockerfile.base'
-        tags: |
-          $(tag)
+      - template: build/catkin_make.yaml
+
+- stage: catkin_build
+  displayName: Catkin Build
+  jobs:  
+  - job: ubuntu
+    displayName: ubuntu
+    pool:
+      vmImage: 'ubuntu 18.04'
+    strategy:
+      matrix:
+        MELODIC:
+          CONTAINER: kukafri
+          CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=Debug'
+        NOETIC:
+          CONTAINER: kukafri2004
+          CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=Debug'
+    container: $[ variable['CONTAINER'] ]
+    timeoutInMinutes: 0
+    variables:
+      BUILD_DIR: '$($(Agent.BuildDirectory)/catkin_ws'
+    steps:
+      - template: build/catkin_build.yaml

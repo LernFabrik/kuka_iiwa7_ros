@@ -8,36 +8,11 @@ trigger:
 resources:
   containers:
     - container: kukafri
-      image: prachandabhanu/kuka-fri
+      image: prachandabhanu/env:kuka-fri
     - container: kukafri2004
-      image: prachandabhanu/kuka-fri2004
-
-variables:
-  tag: '$(Build.BuildId)'
+      image: prachandabhanu/env:kuka-fri2004
 
 stages:
-- stage: catkin_make
-  displayName: Catkin Make
-  jobs:  
-  - job: ubuntu
-    displayName: ubuntu
-    pool:
-      vmImage: 'ubuntu-latest'
-    strategy:
-      matrix:
-        MELODIC:
-          CONTAINER: kukafri
-          CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=Debug'
-        NOETIC:
-          CONTAINER: kukafri2004
-          CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=Debug'
-    container: $[ variable['CONTAINER'] ]
-    timeoutInMinutes: 0
-    variables:
-      BUILD_DIR: '$($(Agent.BuildDirectory)/catkin_ws'
-    steps:
-      - template: build/catkin_make.yaml
-
 - stage: catkin_build
   displayName: Catkin Build
   jobs:  
@@ -49,13 +24,39 @@ stages:
       matrix:
         MELODIC:
           CONTAINER: kukafri
+          ROS_DISRO: melodic
           CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=Debug'
         NOETIC:
           CONTAINER: kukafri2004
+          ROS_DISRO: noetic
           CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=Debug'
-    container: $[ variable['CONTAINER'] ]
+    container: $[ variables['CONTAINER'] ]
     timeoutInMinutes: 0
     variables:
-      BUILD_DIR: '$($(Agent.BuildDirectory)/catkin_ws'
+      BUILD_DIR: '$(Agent.BuildDirectory)/catkin_ws'
     steps:
       - template: build/catkin_build.yaml
+
+- stage: catkin_make
+  displayName: Catkin Make
+  jobs:  
+  - job: ubuntu
+    displayName: ubuntu
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      matrix:
+        MELODIC:
+          CONTAINER: kukafri
+          ROS_DISRO: melodic
+          CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=Debug'
+        NOETIC:
+          CONTAINER: kukafri2004
+          ROS_DISRO: noetic
+          CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=Debug'
+    container: $[ variables['CONTAINER'] ]
+    timeoutInMinutes: 0
+    variables:
+      BUILD_DIR: '$(Agent.BuildDirectory)/catkin_ws'
+    steps:
+      - template: build/catkin_make.yaml

@@ -1,0 +1,11 @@
+steps:
+    - checkout: self
+      path: catkin_ws/src 
+
+    - script: | 
+        cd $BUILD_DIR/src && ls -a \
+        && wstool init . \
+        && wstool merge $BUILD_DIR/src/kuka_ros.rosinstall && wstool up --delete-changed-uris \
+        && cd $BUILD_DIR/src \
+        && catkin_init_workspace && cd $BUILD_DIR \
+        && catkin_make 

@@ -1,6 +1,6 @@
 # KUKA ROS Driver
-- git: {local-name: iiwa_ros, uri: 'https://github.com/LernFabrik/iiwa_ros.git', version: 0f0d4576}
+- git: {local-name: iiwa_ros, uri: 'https://github.com/LernFabrik/iiwa_ros.git', version: 0f0d457}
 # Pilz industrial motion
-- git: {local-name: pilz_industrial_motion, uri: 'https://github.com/PilzDE/pilz_industrial_motion.git', version:  3f73692}
+- git: {local-name: pilz_industrial_motion, uri: 'https://github.com/PilzDE/pilz_industrial_motion.git', version: 3f73692}
 # Gripper 
-- git: {local-name: wsg50_ros, uri: 'https://github.com/prachandabhanu/wsg50_ros.git', version:  ad67f95}
+- git: {local-name: wsg50_ros, uri: 'https://github.com/prachandabhanu/wsg50_ros.git', version: ad67f95}

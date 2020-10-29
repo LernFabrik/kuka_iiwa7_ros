@@ -1,0 +1,20 @@
+steps:
+    - checkout: self
+      path: catkin_ws/src
+    
+    - script: |
+        cd /usr/local && ls \
+        && cd include && ls
+    
+    - script: | 
+        cd $BUILD_DIR/src \
+        && wstool init . \
+        && wstool merge $BUILD_DIR/src/kuka_ros.rosinstall && wstool up --delete-changed-uris \
+        && cd $BUILD_DIR \
+        && source /opt/ros/$ROS_DISRO/setup.bash \
+        && rosdep update \
+        && rosdep install --ignore-src --from-path src -y -r \
+        && catkin init  \
+        && catkin build --dry-run \
+        && catkin build \
+        && catkin build --verbose

@@ -1,8 +1,9 @@
 # kuka_plc_ros
 
-|Branch    |  ROS Distro  |  Status   | GitHub Action |
-|----------|--------------|-----------|---------------|
-|master    |  Melodic     |[![Build Status](https://travis-ci.org/prachandabhanu/kuka_plc_ros.svg?branch=master)](https://travis-ci.org/prachandabhanu/kuka_plc_ros)| ![CI](https://github.com/prachandabhanu/kuka_plc_ros/workflows/CI/badge.svg?branch=master) |
+|Branch    |  ROS Distro  |  Status   | GitHub Action | Azure Pipeline | 
+|----------|--------------|-----------|---------------|----------------|
+|master    |  Melodic     |[![Build Status](https://travis-ci.org/prachandabhanu/kuka_plc_ros.svg?branch=master)](https://travis-ci.org/prachandabhanu/kuka_plc_ros)| ![CI](https://github.com/prachandabhanu/kuka_plc_ros/workflows/CI/badge.svg?branch=master) | [![Build Status](https://dev.azure.com/IWT-Digitization/BuildEnv/_apis/build/status/LernFabrik.kuka_iiwa7_ros?branchName=master&stageName=Catkin%20Build&jobName=ubuntu&configuration=ubuntu%20MELODIC)](https://dev.azure.com/IWT-Digitization/BuildEnv/_build/latest?definitionId=12&branchName=master)|
+| Master   |  Noetic      |    NAN    |    NAN        |[![Build Status](https://dev.azure.com/IWT-Digitization/BuildEnv/_apis/build/status/LernFabrik.kuka_iiwa7_ros?branchName=master&stageName=Catkin%20Build&jobName=ubuntu&configuration=ubuntu%20NOETIC)](https://dev.azure.com/IWT-Digitization/BuildEnv/_build/latest?definitionId=12&branchName=master)|
 
 ### Instalation
 ```

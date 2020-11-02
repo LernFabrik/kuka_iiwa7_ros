@@ -1,22 +1,6 @@
 version: '3'
 
 services: 
-    robot-base:
-        build: 
-            context: .
-            dockerfile: Dockerfile.base
-            args:
-                - ROS_DISTRO=melodic
-        image: prachandabhanu/env:melodic-robot
-    
-    kuka-install:
-        build: 
-            context: .
-            dockerfile: Dockerfile.fri
-            args: 
-                - ROS_DISTRO=melodic
-                - BASE_IMAGE=prachandabhanu/env:melodic-robot
-        image: prachandabhanu/env:kuka-fri
     
     kuka-ros:
         build: 

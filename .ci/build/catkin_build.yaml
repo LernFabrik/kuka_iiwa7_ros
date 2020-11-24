@@ -16,5 +16,6 @@ steps:
         && rosdep install --ignore-src --from-path src -y -r \
         && catkin init  \
         && catkin build --dry-run \
+        && catkin build iiwa_tools \
         && catkin build \
         && catkin build --verbose

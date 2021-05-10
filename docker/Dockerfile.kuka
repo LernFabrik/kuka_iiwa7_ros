@@ -7,3 +7,11 @@ RUN cd ~/catkin_ws/src \
 
 RUN cd ~/catkin_ws \
     && rosdep install --ignore-src --from-paths src -y
+
+COPY ./vscode.sh ./
+
+#RUN chmod +x ./vscode.sh 
+#RUN ./vscode.sh
+
+ENTRYPOINT ["top", "-b"]
+CMD ["-c"]

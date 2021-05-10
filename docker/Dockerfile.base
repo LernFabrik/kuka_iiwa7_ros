@@ -30,9 +30,6 @@ RUN apt-get clean && apt-get update \
     cd ~/catkin_ws && \
     catkin init && \
     catkin build && \
-    echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc && \
-   # axcli to trigger actions
-    cd ~/catkin_ws/src && \
-    git clone https://github.com/po1/axcli.git
+    echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 RUN apt-get -y install bash-completion ros-$ROS_DISTRO-rviz

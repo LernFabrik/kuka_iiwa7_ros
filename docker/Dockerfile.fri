@@ -82,13 +82,15 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
     ros-${ROS_DISTRO}-gazebo-plugins
 
 COPY ./kuka_fri ./kuka_fri
-COPY ./kuka_fri_install.sh ./ 
 
 RUN cd kuka_fri \
     && ./waf configure \
     && ./waf \
     && ./waf install
 
-RUN chmod +x ./kuka_fri_install.sh && ./kuka_fri_install.sh
+COPY ./kuka_fri_install.sh ./ 
+
+RUN chmod +x ./kuka_fri_install.sh 
+RUN sed -i -e 's/\r$//' kuka_fri_install.sh && ./kuka_fri_install.sh
 
 RUN rm -rf SpaceVecAlg RBDyn mc_rbdyn_urdf corrade robot_controllers kuka_fri 

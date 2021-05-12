@@ -89,9 +89,9 @@ void iwtros::iiwaMove::_ctrl_loop(){
         ros::spinOnce();
         bool home_position = true;
         while(ros::ok()){
-                geometry_msgs::PoseStamped DHBW_pose = generatePose(0.228, -0.428, 1.315, M_PI, 0 , M_PI/4 + M_PI/2, "iiwa_link_0");
-                geometry_msgs::PoseStamped home_pose = generatePose(0.228, 0.428, 1.3, M_PI, 0 , M_PI/4 + M_PI/2, "iiwa_link_0");
-                geometry_msgs::PoseStamped conveyor_pose = generatePose(0.6, 0.09, 1.12, M_PI, 0 , M_PI/4 + M_PI/2, "iiwa_link_0");
+                geometry_msgs::PoseStamped DHBW_pose = generatePose(0.602, 0.310, 1.117, M_PI, 0, M_PI/4, "iiwa_link_0");
+                geometry_msgs::PoseStamped home_pose = generatePose(0.5, 0, 1.3, M_PI, 0, M_PI/4, "iiwa_link_0");
+                geometry_msgs::PoseStamped conveyor_pose = generatePose(0.235, -0.43, 1.223, M_PI, 0 , M_PI/4, "iiwa_link_0");
                 _plcKUKA.ConveyorPlaced = false;
                 _plcKUKA.DHBWPlaced = false;
                 _plcKUKA.ReachedHome = false;
@@ -116,8 +116,9 @@ void iwtros::iiwaMove::_ctrl_loop(){
                         _plcKUKA.ConveyorPlaced = true;
                         _plcPub.publish(_plcKUKA);
                 }
-                if(_plcSubscriberControl.MoveHome){
+                if(home_position && _plcSubscriberControl.MoveHome){
                         home_position = false;
+                        ready_pick_pose = true;
                         ROS_WARN("Home Pose");
                         motionExecution(home_pose);
                         _plcKUKA.ConveyorPlaced = false;
@@ -125,8 +126,7 @@ void iwtros::iiwaMove::_ctrl_loop(){
                         _plcKUKA.ReachedHome = true;
                         _plcPub.publish(_plcKUKA);
                 }
-                if(ready_pick_pose) ROS_INFO("Ready to accept the goal");
-                else if(ready_pick_pose) ROS_INFO("Waiting for PLC");
+
                 else{
                         ROS_WARN("Doing Nothing and I am HAPPY!");
                 }
@@ -152,11 +152,6 @@ void iwtros::iiwaMove::pnpPipeLine(geometry_msgs::PoseStamped pick,
         motionExecution(pick);
         // Go to Place Prepose (PTP)
         place.pose.position.z += offset;
-        geometry_msgs::PoseStamped temp_pose = place;
-        temp_pose.pose.position.x = 0.45;
-        temp_pose.pose.position.y = -0.25;
-        temp_pose.pose.position.z += 0.05;
-        motionExecution(temp_pose);
         motionExecution(place);
         // Go to Place pose, ToDo: Set LIN motion
         place.pose.position.z -= offset;

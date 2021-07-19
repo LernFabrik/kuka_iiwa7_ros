@@ -17,11 +17,11 @@ wstool --delete-changed-uris up
 ```
 
 # How to start
-**++** represent new terminal.
-1. **++** `roscore`
-2. **++** `iwtros_launch iiwa_description.launch`
-3. **++** `wsg_50_tcp_driver test.launch`
-4. **++** `iwtros_lauch iwtros_env.lauch``
-5. **++** `kuka_control plc_control_node.py`
+*++* represent new terminal.
+1. *++* `roscore`
+2. *++* `iwtros_launch iiwa_description.launch`
+3. *++* `wsg_50_tcp_driver test.launch`
+4. *++* `iwtros_lauch iwtros_env.lauch``
+5. *++* `kuka_control plc_control_node.py`
 6. Start the programm in Conveyor belt system
-7. Finally **++** `kuka_control control.launch`
+7. Finally *++* `kuka_control control.launch`

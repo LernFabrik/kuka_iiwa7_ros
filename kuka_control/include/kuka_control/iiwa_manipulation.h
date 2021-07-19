@@ -35,7 +35,6 @@ namespace iwtros{
         ros::Subscriber _plcSub;
         bool _initialized = false;
         moveit::planning_interface::MoveGroupInterface move_group;
-        tf2_ros::Buffer buffer;
         // moveit parameters
         /** ToDo:
          * Currently parameters are hard coded.
@@ -47,9 +46,7 @@ namespace iwtros{
         std::string EE_FRAME;
         double velocityScalling;
         double accelerationScalling;
-        geometry_msgs::Transform detected_pose;
-        geometry_msgs::PoseStamped pick_pose;
-        bool ready_pick_pose, _accept_pose;
+        bool ready_pick_pose;
         iwtros_msgs::plcControl _plcSubscriberControl; 
         iwtros_msgs::kukaControl _plcKUKA; 
 
@@ -61,10 +58,6 @@ namespace iwtros{
 
          /** PLC Control Callback*/ 
         void plcCallback(const iwtros_msgs::plcControl::ConstPtr& data);
-
-        /** Detected Pose Callback*/ 
-        void callback(const geometry_msgs::TransformStamped::ConstPtr& data);
-        void acceptCallback(const std_msgs::Bool::ConstPtr &data);
 
         /** Return geometry pose from given poisition values*/
         void generateMeanPose(const geometry_msgs::Transform detection);

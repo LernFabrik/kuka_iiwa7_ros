@@ -15,6 +15,13 @@ wstool init
 wstool merge <path>/kuka_ros.rostinstall
 wstool --delete-changed-uris up
 ```
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FLernFabrik%2Fkuka_iiwa7_ros.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FLernFabrik%2Fkuka_iiwa7_ros?ref=badge_large)
-=======
+
+# How to start
+**++** represent new terminal.
+1. **++** `roscore`
+2. **++** `iwtros_launch iiwa_description.launch`
+3. **++** `wsg_50_tcp_driver test.launch`
+4. **++** `iwtros_lauch iwtros_env.lauch``
+5. **++** `kuka_control plc_control_node.py`
+6. Start the programm in Conveyor belt system
+7. Finally **++** `kuka_control control.launch`

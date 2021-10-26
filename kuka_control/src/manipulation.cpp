@@ -34,8 +34,8 @@ void iwtros::iiwaMove::_loadParam(){
         PLANNER_ID = "PTP";
         REFERENCE_FRAME = "iiwa_link_0";
         EE_FRAME = "iiwa_link_ee";
-        velocityScalling = 0.3;
-        accelerationScalling = 0.3;
+        velocityScalling = 0.35;
+        accelerationScalling = 0.4;
         // ToDo: input array param goals
 }
 
@@ -89,9 +89,9 @@ void iwtros::iiwaMove::_ctrl_loop(){
         ros::spinOnce();
         bool home_position = true;
         while(ros::ok()){
-                geometry_msgs::PoseStamped DHBW_pose = generatePose(0.602, 0.310, 1.117, M_PI, 0, M_PI/4, "iiwa_link_0");
+                geometry_msgs::PoseStamped DHBW_pose = generatePose(0.602, 0.310, 1.116, M_PI, 0, M_PI/4, "iiwa_link_0");
                 geometry_msgs::PoseStamped home_pose = generatePose(0.5, 0, 1.3, M_PI, 0, M_PI/4, "iiwa_link_0");
-                geometry_msgs::PoseStamped conveyor_pose = generatePose(0.235, -0.43, 1.223, M_PI, 0 , M_PI/4, "iiwa_link_0");
+                geometry_msgs::PoseStamped conveyor_pose = generatePose(0.235, -0.43, 1.221, M_PI, 0 , M_PI/4, "iiwa_link_0");
                 _plcKUKA.ConveyorPlaced = false;
                 _plcKUKA.DHBWPlaced = false;
                 _plcKUKA.ReachedHome = false;
